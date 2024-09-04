@@ -1,0 +1,67 @@
+[{
+    "id": 1,
+    "email": "ian.taylor@example.com",
+    "password": "123",
+    "username": "IanTaylor"
+},
+{
+    "id": 2,
+    "email": "julia.moore@example.com",
+    "password": "123",
+    "username": "JuliaMoore"
+},
+{
+    "id": 3,
+    "email": "kevin.clark@example.com",
+    "password": "123",
+    "username": "KevinClark"
+},
+{
+    "id": 4,
+    "email": "laura.adams@example.com",
+    "password": "123",
+    "username": "LauraAdams"
+},
+{
+    "id": 5,
+    "email": "mike.wilson@example.com",
+    "password": "123",
+    "username": "MikeWilson"
+},
+{
+    "id": 6,
+    "email": "nancy.lee@example.com",
+    "password": "123",
+    "username": "NancyLee"
+},
+{
+    "id": 7,
+    "email": "oscar.martin@example.com",
+    "password": "123",
+    "username": "OscarMartin"
+},
+{
+    "id": 8,
+    "email": "patricia.king@example.com",
+    "password": "123",
+    "username": "PatriciaKing"
+},
+{
+    "id": 9,
+    "email": "quinn.roberts@example.com",
+    "password": "123",
+    "username": "QuinnRoberts"
+},
+{
+    "id": 10,
+    "email": "rachel.scott@example.com",
+    "password": "123",
+    "username": "RachelScott"
+},
+{
+    "id": 11,
+    "email": "steve.turner@example.com",
+    "password": "123",
+    "username": "SteveTurner"
+}
+]
