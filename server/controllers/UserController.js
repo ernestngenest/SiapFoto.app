@@ -4,6 +4,7 @@ const { compareToken } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
 const { OAuth2Client } = require("google-auth-library");
 const client = new OAuth2Client();
+
 class UserController {
   static async template(req, res, next) {
     try {
@@ -121,9 +122,21 @@ class UserController {
       res.status(201).json({
         access_token: signToken({ id: sub, email: email, name: name }),
       });
+      // next()
     } catch (error) {
       next(error);
     }
+  }
+  static async updateUsername (req , res , next) {
+    try {
+      let { id } = req.params
+      let { username } = req.body 
+      
+
+    } catch (error) {
+      next(error)
+    }
+    
   }
 }
 

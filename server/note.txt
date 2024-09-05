@@ -80,3 +80,30 @@ module.exports = (sequelize, DataTypes) => {
   })
   return User;
 };
+
+==================
+
+
+{
+    "ok": true,
+    "gallery_edit": "https://imgbox.com/gallery/edit/4X0VMsxGT1/oocCShAwYnIaGTJg",
+    "files": [
+        {
+            "id": "LwRWEwag",
+            "slug": "LwRWEwag",
+            "name": "91c34d13-19a5-467d-95a5-ece2a44b4f75.jpg",
+            "name_html_escaped": "91c34d13-19a5-467d-95a5-ece2a44b4f75.jpg",
+            "created_at": "2024-09-05T07:37:23.503Z",
+            "created_at_human": "September 05, 2024 07:37",
+            "updated_at": "2024-09-05T07:37:27.553Z",
+            "gallery_id": "4X0VMsxGT1",
+            "url": "https://imgbox.com/LwRWEwag",
+            "original_url": "https://images2.imgbox.com/51/22/LwRWEwag_o.jpg",
+            "thumbnail_url": "https://thumbs2.imgbox.com/51/22/LwRWEwag_t.jpg",
+            "square_url": "https://thumbs2.imgbox.com/51/22/LwRWEwag_b.jpg",
+            "selected": false,
+            "comments_enabled": 0,
+            "comments_count": 0
+        }
+    ]
+}

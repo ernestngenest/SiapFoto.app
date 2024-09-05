@@ -30,6 +30,9 @@ let errorHandler = (error, req, res, next) => {
     case "invalid google token !":
       status = 400,
       message  = "invalid google token !"
+    case "unknown file":
+      status = 400;
+      message = "unknown file" 
   }
   res.status(status).json({
     message: message,
