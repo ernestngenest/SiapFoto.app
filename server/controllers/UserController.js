@@ -131,8 +131,18 @@ class UserController {
     try {
       let { id } = req.params
       let { username } = req.body 
+      if(!username) throw {name : "-" ,  status: 400 , message: "username required"}
       
-
+      let { data } = await User.update({
+        username,
+      },{
+        where:{
+          id:id
+        }
+      })
+      res.status(201).json({
+        message: "Username has been updated",
+      })
     } catch (error) {
       next(error)
     }

@@ -90,7 +90,8 @@ export default function Login() {
     );
     google.accounts.id.prompt();
   }, []);
-  console.log(dataForm, "ini data form");
+
+  // console.log(dataForm, "ini data form");
   return (
     <div className="font-[sans-serif]">
       <div className="min-h-screen flex fle-col items-center justify-center py-6 px-4">
