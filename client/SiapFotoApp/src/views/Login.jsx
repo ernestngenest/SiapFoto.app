@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { toast } from "react-toastify";
 import { baseApi } from "../helpers/baseApi";
@@ -15,8 +15,10 @@ export default function Login() {
     e.preventDefault(e);
     try {
       const response = await baseApi.post("/login", dataForm);
-      //   console.log("response: ", response);
+      console.log("response: ", response);
       localStorage.setItem("access_token", response.data?.access_token);
+      localStorage.setItem("username", response.data?.username);
+      localStorage.setItem("id", response.data?.id);
       toast.success("Berhasil Login !", {
         position: "top-right",
         autoClose: 5000,
@@ -27,7 +29,7 @@ export default function Login() {
         progress: undefined,
         theme: "light",
       });
-      navigate("/");
+      navigate("/generate");
     } catch (error) {
       toast(error.response.data.error || error.message, {
         position: "top-right",
@@ -44,41 +46,39 @@ export default function Login() {
   const handleDataFormChange = e => {
     setDataForm({ ...dataForm, [e.target.name]: e.target.value });
   };
-  const handleCredentialResponse = async (response) => {
+  const handleCredentialResponse = async response => {
     try {
-         let apiResponse = await baseApi.post('/login/google' ,
-            {
-                googleToken : response.credential
-            },
-        );
-        console.log("response: ", apiResponse);
-        toast.success("Berhasil Login !", {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        // console.log("response: ", response);
-        localStorage.setItem("access_token", response.data?.access_token);
-        navigate("/")
+      let apiResponse = await baseApi.post("/login/google", {
+        googleToken: response.credential,
+      });
+      console.log("response: ", apiResponse);
+      toast.success("Berhasil Login !", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      // console.log("response: ", response);
+      localStorage.setItem("access_token", response.data?.access_token);
+      navigate("/");
     } catch (error) {
-        console.log("error: ", error);
-        toast(error.response.data.error || error.message, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
+      console.log("error: ", error);
+      toast(error.response.data.error || error.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
-  }
+  };
   useEffect(() => {
     google.accounts.id.initialize({
       client_id: import.meta.env.VITE_CLIENT_ID,
@@ -140,15 +140,16 @@ export default function Login() {
                   Log in
                 </button>
               </div>
-              
               <div className="w-full" id="buttonDiv"></div>
               <p className="text-sm !mt-8 text-center text-gray-800">
                 Dont have an account{" "}
-                <a
-                  href="javascript:void(0);"
-                  className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">
-                  Register here
-                </a>
+                <Link to={"/register"}>
+                  <a
+                    href="javascript:void(0);"
+                    className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">
+                    Register here
+                  </a>
+                </Link>
               </p>
             </form>
           </div>
@@ -159,7 +160,6 @@ export default function Login() {
               alt="Dining Experience"
             />
           </div>
-          
         </div>
       </div>
     </div>

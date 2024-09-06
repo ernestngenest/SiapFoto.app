@@ -23,7 +23,7 @@ class ImageController {
 
       const staticParam = JSON.parse(fs.readFileSync("./data/setParam.json", "utf-8"));
 
-      let imgType = req.body.imgtype;
+      let imgType = req.body.imgType;
       let index = imgType === "female" ? 1 : 0;
 
       const result = await fal.subscribe("fal-ai/omni-zero", {

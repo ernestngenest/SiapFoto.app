@@ -69,11 +69,13 @@ class UserController {
 
       const valid = compareToken(password, dataEmail.password);
       if (valid) {
+        let token =  signToken({ id: dataEmail.id })
         res.status(200).json({
           id: dataEmail.id,
           username: dataEmail.username,
-          access_token: signToken({ id: dataEmail.id }),
+          access_token:token,
         });
+        console.log(access_token , "ini access token ")
       } else {
         throw { name: "-", status: 401, message: "Invalid email/password" };
       }

@@ -11,18 +11,15 @@ const authorization = async (req, res, next) => {
       },
     });
     if (!data) throw { name: "Forbbiden" };
-    if (req.user.role === "admin") {
-      next();
-    } else if (req.user.role === "staff") {
-      let userId = req.user.id;
-      let owner = data.authorId;
-      if (userId !== owner) {
-        throw { name: "Forbbiden" };
-      }
-      next();
+    let userId = req.user.id;
+    let owner = data.authorId;
+    if (userId !== owner) {
+      throw { name: "Forbbiden" };
     }
-  } catch (error) {
+    next();
+  }catch (error) {
     next(error);
   }
-};
+}
+
 module.exports = authorization;

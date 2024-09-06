@@ -1,26 +1,31 @@
 // Update the sidebar layout to make it more aesthetic and descriptive
 
-import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
+    const nav = useNavigate();
+    const handleLogOut = () => {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("username");
+      localStorage.removeItem("id");
+      nav("/login");
+    };
   return (
-    <div>
-      <nav className="bg-[#121e31] h-screen fixed top-0 left-0 min-w-[250px] py-6 px-4 font-[sans-serif] tracking-wide overflow-auto">
-        <div className="flex items-center gap-4 cursor-pointer">
-          <img
-            src="https://readymadeui.com/logo.png"
-            alt="Logo"
-            className="w-12 h-12 rounded-full border-2 border-white"
-          />
-          <div>
-            <p className="text-sm text-white">John Doe</p>
-            <p className="text-xs text-gray-300 mt-0.5">Change Username</p>
-          </div>
+    <nav className="bg-black h-screen  top-0 left-0 min-w-[260px] py-6 px-4 font-[sans-serif]">
+      <div className="flex items-center gap-4 cursor-pointer">
+       
+        <div className="mx-5">
+          <p className="text-sm text-white">{localStorage.getItem("username")}</p>
+          <Link to="/update-username">
+          <p className="text-xs text-gray-300 mt-0.5">Change Username</p>
+          </Link>
         </div>
+      </div>
 
-        <hr className="my-6 border-gray-400" />
+      <hr className="my-6 border-gray-400" />
 
-        <ul className="space-y-3">
+      <ul className="space-y-3">
+        <Link to={"/generate"}>
           <li>
             <a
               href="javascript:void(0)"
@@ -41,6 +46,8 @@ export default function Sidebar() {
               <span className="mx-3">Take Photo</span>
             </a>
           </li>
+        </Link>
+        <Link to={"/my-photo"}>
           <li>
             <a
               href="javascript:void(0)"
@@ -58,26 +65,22 @@ export default function Sidebar() {
                 <circle cx="8.5" cy="8.5" r="1.5"></circle>
                 <path d="M21 15l-5-5L5 21"></path>
               </svg>
-              <span className="mx-5">My Photo</span>
+              <span className="mx-3">My Photo</span>
             </a>
           </li>
+        </Link>
 
-          <li>
-            <a
-              href="javascript:void(0)"
-              className="text-white text-sm flex items-center hover:bg-gray-700 rounded px-4 py-3 transition-all">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                className="w-[18px] h-[18px] mr-4"
-                viewBox="0 0 512 512">
-                {/* <!-- SVG Path for Logout --> */}
-              </svg>
-              <span>Logout</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+        <li>    
+        <div className="flex max-lg:ml-auto space-x-3 justify-center
+         me-6">
+            <button
+              className="px-4 py-2 text-sm rounded-full font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff]"
+              onClick={handleLogOut}>
+              Log Out
+            </button>
+          </div>
+        </li>
+      </ul>
+    </nav>
   );
 }

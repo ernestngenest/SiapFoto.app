@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { baseApi } from "../helpers/baseApi";
 import { toast } from "react-toastify";
 
@@ -118,11 +118,13 @@ export default function Register() {
 
                 <p className="text-sm !mt-8 text-center text-gray-800">
                   Already Have an Account?{" "}
-                  <a
-                    href="javascript:void(0);"
-                    className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">
-                    Login here
-                  </a>
+                  <Link to={"/login"}>
+                    <a
+                      href="javascript:void(0);"
+                      className="text-blue-600 font-semibold hover:underline ml-1 whitespace-nowrap">
+                      Login here
+                    </a>
+                  </Link>
                 </p>
               </form>
             </div>
