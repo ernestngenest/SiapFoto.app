@@ -15,7 +15,9 @@ router.post("/login/google" , UserController.googleLogin)
 router.use(authentication)
 router.get("/image" , ImageController.allImage)
 router.post("/image" , ImageController.postImg)
+router.get("/getimgById/:id" , ImageController.getImgById)
 router.delete("/image/:id" , ImageController.deleteImage)
 router.put("/update/:id"  , UserController.updateUsername)
+router.post("/sendEmail/:id"  , ImageController.sendEmail)
 router.use(errorHandler);
 module.exports = router

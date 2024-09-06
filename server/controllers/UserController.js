@@ -1,5 +1,5 @@
-const { Op, where } = require("sequelize");
-const { User, Image } = require("../models");
+const { Op } = require("sequelize");
+const { User } = require("../models");
 const { compareToken } = require("../helpers/bcrypt");
 const { signToken } = require("../helpers/jwt");
 const { OAuth2Client } = require("google-auth-library");
@@ -11,8 +11,10 @@ class UserController {
       res.send("hello");
     } catch (error) {
       console.log(error);
+      next(error);
     }
   }
+
   static async register(req, res, next) {
     try {
       const { username, email, password } = req.body;
@@ -29,24 +31,20 @@ class UserController {
         },
       });
 
-      console.log("emailData: ", emailData);
       if (emailData)
         throw { name: "custom", status: 400, message: "Email already taken!" };
 
-      const { data } = await User.create({
+      await User.create({
         username,
         email,
         password,
       });
 
-      // console.log("data: ", data);
       res.status(201).json({
-        message: "account succesfuly created",
+        message: "Account successfully created",
       });
     } catch (error) {
-      // console.log(error)
       next(error);
-      // res.send(error)
     }
   }
 
@@ -65,27 +63,22 @@ class UserController {
         },
       });
 
-      if (!dataEmail)
-        throw {
-          name: "-",
-          status: 401,
-          message: "Invalid email/password",
-        };
+      if (!dataEmail) {
+        throw { name: "-", status: 401, message: "Invalid email/password" };
+      }
 
       const valid = compareToken(password, dataEmail.password);
       if (valid) {
         res.status(200).json({
+          id: dataEmail.id,
+          username: dataEmail.username,
           access_token: signToken({ id: dataEmail.id }),
         });
       } else {
-        throw {
-          name: "-",
-          status: 401,
-          message: "Invalid email/password",
-        };
+        throw { name: "-", status: 401, message: "Invalid email/password" };
       }
     } catch (error) {
-      console.log(error);
+      next(error);
     }
   }
 
@@ -93,17 +86,14 @@ class UserController {
     try {
       const { googleToken } = req.body;
       if (!googleToken) throw { name: "invalid google token !" };
+
       const ticket = await client.verifyIdToken({
         idToken: googleToken,
-        audience: process.env.CLIENT_ID, // Specify the CLIENT_ID of the app that accesses the backend
-        // Or, if multiple clients access the backend:
-        //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+        audience: process.env.CLIENT_ID,
       });
       const payload = ticket.getPayload();
-      // console.log(payload)
-      const { name, email, picture, sub } = payload;
+      const { name, email, sub } = payload;
 
-      // const userid = payload['sub'];
       let dataUser = await User.findOne({
         where: {
           email: {
@@ -111,42 +101,42 @@ class UserController {
           },
         },
       });
-      let data = [];
+
       if (!dataUser) {
-        data = await User.create({
-          username : name,
+        dataUser = await User.create({
+          username: name,
           email,
           password: Math.random().toString(),
         });
       }
+
       res.status(201).json({
-        access_token: signToken({ id: sub, email: email, name: name }),
+        id: dataUser.id,
+        username: name,
+        access_token: signToken({ id: sub, email, name }),
       });
-      // next()
     } catch (error) {
       next(error);
     }
   }
-  static async updateUsername (req , res , next) {
+
+  static async updateUsername(req, res, next) {
     try {
-      let { id } = req.params
-      let { username } = req.body 
-      if(!username) throw {name : "-" ,  status: 400 , message: "username required"}
-      
-      let { data } = await User.update({
-        username,
-      },{
-        where:{
-          id:id
-        }
-      })
+      const { id } = req.params;
+      const { username } = req.body;
+
+      if (!username) throw { name: "-", status: 400, message: "Username required" };
+
+      await User.update({ username }, {
+        where: { id }
+      });
+
       res.status(201).json({
         message: "Username has been updated",
-      })
+      });
     } catch (error) {
-      next(error)
+      next(error);
     }
-    
   }
 }
 
