@@ -1,0 +1,58 @@
+[
+    {
+      "imgUrl": "https://example.com/image1.jpg",
+      "userid": 1,
+      "prompt": "A serene mountain landscape"
+    },
+    {
+      "imgUrl": "https://example.com/image2.jpg",
+      "userid": 2,
+      "prompt": "A bustling city skyline at night"
+    },
+    {
+      "imgUrl": "https://example.com/image3.jpg",
+      "userid": 3,
+      "prompt": "A peaceful beach during sunset"
+    },
+    {
+      "imgUrl": "https://example.com/image4.jpg",
+      "userid": 4,
+      "prompt": "A dense forest with fog"
+    },
+    {
+      "imgUrl": "https://example.com/image5.jpg",
+      "userid": 5,
+      "prompt": "A starry night sky over mountains"
+    },
+    {
+      "imgUrl": "https://example.com/image6.jpg",
+      "userid": 6,
+      "prompt": "A cat sleeping on a cozy couch"
+    },
+    {
+      "imgUrl": "https://example.com/image7.jpg",
+      "userid": 7,
+      "prompt": "A futuristic city with flying cars"
+    },
+    {
+      "imgUrl": "https://example.com/image8.jpg",
+      "userid": 8,
+      "prompt": "A beautiful flower garden"
+    },
+    {
+      "imgUrl": "https://example.com/image9.jpg",
+      "userid": 9,
+      "prompt": "A snowy mountain peak"
+    },
+    {
+      "imgUrl": "https://example.com/image10.jpg",
+      "userid": 10,
+      "prompt": "A desert with sand dunes"
+    },
+    {
+      "imgUrl": "https://example.com/image11.jpg",
+      "userid": 11,
+      "prompt": "A vibrant city street at dusk"
+    }
+  ]
+  

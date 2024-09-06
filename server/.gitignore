@@ -1,0 +1,4 @@
+node_modules
+*.env
+key_instanceAWS/tokshi-chiko.pem
+server/config/config.json
